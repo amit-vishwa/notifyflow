@@ -1,11 +1,33 @@
 package com.learning.notifyflow.model;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
+@Entity
+@Table(name = "notifications")
 public class Notification {
 
-    private final String id;
-    private final String recipient;
-    private final String message;
+    @Id
+    @Column(nullable = false, length = 36)
+    private String id;
+
+    @Column(nullable = false, length = 254)
+    private String recipient;
+
+    @Column(nullable = false, length = 500)
+    private String message;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
     private NotificationStatus status;
+
+    protected Notification() {
+
+    }
 
     public Notification(String id, String recipient, String message, NotificationStatus status) {
         this.id = id;
